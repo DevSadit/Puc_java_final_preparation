@@ -20,6 +20,7 @@
         --muted: #8892b0;
         --code-bg: #0a0d1a;
         --highlight: #ffd700;
+        --nav-height: 54px;
       }
 
       * {
@@ -38,6 +39,8 @@
         color: var(--text);
         line-height: 1.75;
         font-size: 15px;
+        min-height: 100vh;
+        padding-top: var(--nav-height);
       }
 
       /* NAV */
@@ -66,6 +69,8 @@
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
         overflow-x: auto;
         padding-bottom: 2px;
       }
@@ -112,7 +117,6 @@
 
       /* HERO */
       .hero {
-        margin-top: 54px;
         padding: 60px 40px 40px;
         text-align: center;
         background: radial-gradient(
@@ -180,9 +184,9 @@
 
       /* LAYOUT */
       .container {
-        max-width: 960px;
+        max-width: 1140px;
         margin: 0 auto;
-        padding: 40px 24px;
+        padding: 40px 24px 60px;
       }
 
       /* SECTIONS */
@@ -383,6 +387,10 @@
       }
 
       /* TABLE */
+      .table-wrap {
+        width: 100%;
+        overflow-x: auto;
+      }
       table {
         width: 100%;
         border-collapse: collapse;
@@ -514,15 +522,11 @@
         pre {
           font-size: 12px;
         }
-        table,
-        th,
-        td {
-          display: block;
-          width: 100%;
+        .table-wrap {
+          overflow-x: auto;
         }
         table {
-          overflow-x: auto;
-          display: block;
+          min-width: 100%;
         }
         th,
         td {
@@ -571,6 +575,25 @@
         .q-body,
         .answer-reveal {
           padding: 14px 16px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .nav-title {
+          font-size: 14px;
+        }
+        .nav-toggle {
+          font-size: 16px;
+          padding: 8px 10px;
+        }
+        .hero {
+          padding: 34px 14px 24px;
+        }
+        .badge-row {
+          gap: 8px;
+        }
+        .card {
+          border-radius: 12px;
         }
       }
 
@@ -807,6 +830,7 @@
       <div class="nav-title">📚 OOP Exam Guide</div>
       <button
         class="nav-toggle"
+        aria-controls="navLinks"
         aria-label="Toggle navigation"
         aria-expanded="false"
       >
@@ -889,43 +913,45 @@ s1.<span class="fn">study</span>();                  <span class="cm">// Output:
             Access modifiers control the <strong>visibility</strong> of class
             members.
           </p>
-          <table>
-            <tr>
-              <th>Modifier</th>
-              <th>Same Class</th>
-              <th>Same Package</th>
-              <th>Subclass</th>
-              <th>Everywhere</th>
-            </tr>
-            <tr>
-              <td><code>private</code></td>
-              <td>✅</td>
-              <td>❌</td>
-              <td>❌</td>
-              <td>❌</td>
-            </tr>
-            <tr>
-              <td><code>default</code> (no keyword)</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>❌</td>
-              <td>❌</td>
-            </tr>
-            <tr>
-              <td><code>protected</code></td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>❌</td>
-            </tr>
-            <tr>
-              <td><code>public</code></td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>✅</td>
-              <td>✅</td>
-            </tr>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Modifier</th>
+                <th>Same Class</th>
+                <th>Same Package</th>
+                <th>Subclass</th>
+                <th>Everywhere</th>
+              </tr>
+              <tr>
+                <td><code>private</code></td>
+                <td>✅</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td><code>default</code> (no keyword)</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>❌</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td><code>protected</code></td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>❌</td>
+              </tr>
+              <tr>
+                <td><code>public</code></td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+                <td>✅</td>
+              </tr>
+            </table>
+          </div>
           <div class="tip">
             private = most restricted. public = open to everyone. protected =
             open to subclasses.
@@ -1414,33 +1440,35 @@ System.out.println(c.<span class="fn">area</span>()); <span class="cm">// 78.53.
     <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * width; }
     <span class="kw">public double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="num">2</span> * (length + width); }
 }</pre>
-          <table>
-            <tr>
-              <th>Feature</th>
-              <th>Abstract Class</th>
-              <th>Interface</th>
-            </tr>
-            <tr>
-              <td>Keyword</td>
-              <td>abstract class + extends</td>
-              <td>interface + implements</td>
-            </tr>
-            <tr>
-              <td>Methods</td>
-              <td>Can have regular + abstract</td>
-              <td>All abstract (by default)</td>
-            </tr>
-            <tr>
-              <td>Variables</td>
-              <td>Any type</td>
-              <td>Only constants (static final)</td>
-            </tr>
-            <tr>
-              <td>Multiple inheritance</td>
-              <td>No (only one parent)</td>
-              <td>Yes (can implement multiple)</td>
-            </tr>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Feature</th>
+                <th>Abstract Class</th>
+                <th>Interface</th>
+              </tr>
+              <tr>
+                <td>Keyword</td>
+                <td>abstract class + extends</td>
+                <td>interface + implements</td>
+              </tr>
+              <tr>
+                <td>Methods</td>
+                <td>Can have regular + abstract</td>
+                <td>All abstract (by default)</td>
+              </tr>
+              <tr>
+                <td>Variables</td>
+                <td>Any type</td>
+                <td>Only constants (static final)</td>
+              </tr>
+              <tr>
+                <td>Multiple inheritance</td>
+                <td>No (only one parent)</td>
+                <td>Yes (can implement multiple)</td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <!-- POLYMORPHISM WITH COLLECTIONS -->
@@ -1665,36 +1693,38 @@ System.out.println(c.<span class="fn">area</span>()); <span class="cm">// 78.53.
 
         <div class="card">
           <h3>List, Set, Map — When to use which?</h3>
-          <table>
-            <tr>
-              <th>Collection</th>
-              <th>Ordered?</th>
-              <th>Duplicates?</th>
-              <th>Key-Value?</th>
-              <th>Use When</th>
-            </tr>
-            <tr>
-              <td><strong>List</strong> (ArrayList, LinkedList)</td>
-              <td>✅ Yes</td>
-              <td>✅ Yes</td>
-              <td>❌</td>
-              <td>Order matters & duplicates allowed</td>
-            </tr>
-            <tr>
-              <td><strong>Set</strong> (HashSet)</td>
-              <td>❌ No</td>
-              <td>❌ No</td>
-              <td>❌</td>
-              <td>Uniqueness required (no duplicates)</td>
-            </tr>
-            <tr>
-              <td><strong>Map</strong> (HashMap)</td>
-              <td>❌ No</td>
-              <td>Keys: No, Values: Yes</td>
-              <td>✅</td>
-              <td>Store and retrieve by key</td>
-            </tr>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Collection</th>
+                <th>Ordered?</th>
+                <th>Duplicates?</th>
+                <th>Key-Value?</th>
+                <th>Use When</th>
+              </tr>
+              <tr>
+                <td><strong>List</strong> (ArrayList, LinkedList)</td>
+                <td>✅ Yes</td>
+                <td>✅ Yes</td>
+                <td>❌</td>
+                <td>Order matters & duplicates allowed</td>
+              </tr>
+              <tr>
+                <td><strong>Set</strong> (HashSet)</td>
+                <td>❌ No</td>
+                <td>❌ No</td>
+                <td>❌</td>
+                <td>Uniqueness required (no duplicates)</td>
+              </tr>
+              <tr>
+                <td><strong>Map</strong> (HashMap)</td>
+                <td>❌ No</td>
+                <td>Keys: No, Values: Yes</td>
+                <td>✅</td>
+                <td>Store and retrieve by key</td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div class="card">
@@ -1854,38 +1884,40 @@ System.out.println(s); <span class="cm">// SUMMER</span>
 
         <div class="card">
           <h3>Swing Components (Q5c — BOTH papers)</h3>
-          <table>
-            <tr>
-              <th>Component</th>
-              <th>What it is</th>
-              <th>Common Methods</th>
-            </tr>
-            <tr>
-              <td><code>JFrame</code></td>
-              <td>Main window</td>
-              <td>setTitle(), setSize(), setVisible()</td>
-            </tr>
-            <tr>
-              <td><code>JPanel</code></td>
-              <td>Container/area to group components</td>
-              <td>add(), setLayout()</td>
-            </tr>
-            <tr>
-              <td><code>JLabel</code></td>
-              <td>Text display (non-editable)</td>
-              <td>setText(), getText()</td>
-            </tr>
-            <tr>
-              <td><code>JButton</code></td>
-              <td>Clickable button</td>
-              <td>addActionListener()</td>
-            </tr>
-            <tr>
-              <td><code>JTextField</code></td>
-              <td>Single-line text input</td>
-              <td>setText(), getText()</td>
-            </tr>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Component</th>
+                <th>What it is</th>
+                <th>Common Methods</th>
+              </tr>
+              <tr>
+                <td><code>JFrame</code></td>
+                <td>Main window</td>
+                <td>setTitle(), setSize(), setVisible()</td>
+              </tr>
+              <tr>
+                <td><code>JPanel</code></td>
+                <td>Container/area to group components</td>
+                <td>add(), setLayout()</td>
+              </tr>
+              <tr>
+                <td><code>JLabel</code></td>
+                <td>Text display (non-editable)</td>
+                <td>setText(), getText()</td>
+              </tr>
+              <tr>
+                <td><code>JButton</code></td>
+                <td>Clickable button</td>
+                <td>addActionListener()</td>
+              </tr>
+              <tr>
+                <td><code>JTextField</code></td>
+                <td>Single-line text input</td>
+                <td>setText(), getText()</td>
+              </tr>
+            </table>
+          </div>
 
           <h4>Q5c Solutions — Both Papers:</h4>
           <pre><span class="kw">import</span> javax.swing.*;
@@ -2449,74 +2481,76 @@ System.out.println(Arrays.<span class="fn">toString</span>(arr));</pre>
 
         <div class="card">
           <h3>Key Definitions to Memorize</h3>
-          <table>
-            <tr>
-              <th>Term</th>
-              <th>One-Line Definition</th>
-            </tr>
-            <tr>
-              <td>Class</td>
-              <td>Blueprint for creating objects</td>
-            </tr>
-            <tr>
-              <td>Object</td>
-              <td>Instance of a class</td>
-            </tr>
-            <tr>
-              <td>Encapsulation</td>
-              <td>Hiding data using private + getters/setters</td>
-            </tr>
-            <tr>
-              <td>Inheritance</td>
-              <td>Child class gets parent's members (extends)</td>
-            </tr>
-            <tr>
-              <td>Polymorphism</td>
-              <td>One interface, many implementations</td>
-            </tr>
-            <tr>
-              <td>Abstraction</td>
-              <td>
-                Hiding details, showing only essentials (abstract/interface)
-              </td>
-            </tr>
-            <tr>
-              <td>Overloading</td>
-              <td>Same method name, different parameters (same class)</td>
-            </tr>
-            <tr>
-              <td>Overriding</td>
-              <td>Child redefines parent's method (same signature)</td>
-            </tr>
-            <tr>
-              <td>Dynamic Dispatch</td>
-              <td>Runtime decides which overridden method to call</td>
-            </tr>
-            <tr>
-              <td>Upcasting</td>
-              <td>Child object stored in parent reference</td>
-            </tr>
-            <tr>
-              <td>Downcasting</td>
-              <td>Extracting child type from parent reference</td>
-            </tr>
-            <tr>
-              <td>Constructor</td>
-              <td>Special method that runs when object is created</td>
-            </tr>
-            <tr>
-              <td>Iterator</td>
-              <td>Object to traverse a collection (hasNext, next)</td>
-            </tr>
-            <tr>
-              <td>Exception</td>
-              <td>Unexpected runtime error</td>
-            </tr>
-            <tr>
-              <td>MVC</td>
-              <td>Model (data) + View (UI) + Controller (logic)</td>
-            </tr>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tr>
+                <th>Term</th>
+                <th>One-Line Definition</th>
+              </tr>
+              <tr>
+                <td>Class</td>
+                <td>Blueprint for creating objects</td>
+              </tr>
+              <tr>
+                <td>Object</td>
+                <td>Instance of a class</td>
+              </tr>
+              <tr>
+                <td>Encapsulation</td>
+                <td>Hiding data using private + getters/setters</td>
+              </tr>
+              <tr>
+                <td>Inheritance</td>
+                <td>Child class gets parent's members (extends)</td>
+              </tr>
+              <tr>
+                <td>Polymorphism</td>
+                <td>One interface, many implementations</td>
+              </tr>
+              <tr>
+                <td>Abstraction</td>
+                <td>
+                  Hiding details, showing only essentials (abstract/interface)
+                </td>
+              </tr>
+              <tr>
+                <td>Overloading</td>
+                <td>Same method name, different parameters (same class)</td>
+              </tr>
+              <tr>
+                <td>Overriding</td>
+                <td>Child redefines parent's method (same signature)</td>
+              </tr>
+              <tr>
+                <td>Dynamic Dispatch</td>
+                <td>Runtime decides which overridden method to call</td>
+              </tr>
+              <tr>
+                <td>Upcasting</td>
+                <td>Child object stored in parent reference</td>
+              </tr>
+              <tr>
+                <td>Downcasting</td>
+                <td>Extracting child type from parent reference</td>
+              </tr>
+              <tr>
+                <td>Constructor</td>
+                <td>Special method that runs when object is created</td>
+              </tr>
+              <tr>
+                <td>Iterator</td>
+                <td>Object to traverse a collection (hasNext, next)</td>
+              </tr>
+              <tr>
+                <td>Exception</td>
+                <td>Unexpected runtime error</td>
+              </tr>
+              <tr>
+                <td>MVC</td>
+                <td>Model (data) + View (UI) + Controller (logic)</td>
+              </tr>
+            </table>
+          </div>
         </div>
 
         <div class="card">
