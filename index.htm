@@ -1,0 +1,2629 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OOP Java – Complete Exam Guide</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&family=Nunito:wght@400;600;700&display=swap");
+
+      :root {
+        --bg: #0d0f1a;
+        --surface: #141728;
+        --card: #1a1f35;
+        --border: #252b45;
+        --accent: #6c63ff;
+        --accent2: #ff6584;
+        --accent3: #43e97b;
+        --accent4: #f7971e;
+        --text: #e8ecf5;
+        --muted: #8892b0;
+        --code-bg: #0a0d1a;
+        --highlight: #ffd700;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.75;
+        font-size: 15px;
+      }
+
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: rgba(13, 15, 26, 0.96);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        padding: 0 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 54px;
+      }
+      .nav-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        color: var(--accent);
+      }
+      .nav-links {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .nav-links a:hover {
+        color: var(--text);
+        border-color: var(--accent);
+      }
+
+      /* HERO */
+      .hero {
+        margin-top: 54px;
+        padding: 60px 40px 40px;
+        text-align: center;
+        background: radial-gradient(
+          ellipse at 50% 0%,
+          rgba(108, 99, 255, 0.15) 0%,
+          transparent 60%
+        );
+        border-bottom: 1px solid var(--border);
+      }
+      .hero h1 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(28px, 5vw, 52px);
+        background: linear-gradient(135deg, #6c63ff, #ff6584, #43e97b);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 12px;
+      }
+      .hero p {
+        color: var(--muted);
+        font-size: 16px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .badge-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .badge {
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+      .b1 {
+        background: rgba(108, 99, 255, 0.2);
+        color: #a89cff;
+        border: 1px solid rgba(108, 99, 255, 0.4);
+      }
+      .b2 {
+        background: rgba(255, 101, 132, 0.2);
+        color: #ff8ca5;
+        border: 1px solid rgba(255, 101, 132, 0.4);
+      }
+      .b3 {
+        background: rgba(67, 233, 123, 0.2);
+        color: #6ff5a0;
+        border: 1px solid rgba(67, 233, 123, 0.4);
+      }
+      .b4 {
+        background: rgba(247, 151, 30, 0.2);
+        color: #fdb96a;
+        border: 1px solid rgba(247, 151, 30, 0.4);
+      }
+      .b5 {
+        background: rgba(255, 215, 0, 0.2);
+        color: #ffd700;
+        border: 1px solid rgba(255, 215, 0, 0.4);
+      }
+
+      /* LAYOUT */
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 24px;
+      }
+
+      /* SECTIONS */
+      .section {
+        margin-bottom: 60px;
+        scroll-margin-top: 70px;
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 28px;
+        padding-bottom: 14px;
+        border-bottom: 2px solid var(--border);
+      }
+      .section-num {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        flex-shrink: 0;
+      }
+      .n1 {
+        background: linear-gradient(135deg, #6c63ff, #a89cff);
+      }
+      .n2 {
+        background: linear-gradient(135deg, #ff6584, #ffb3c1);
+      }
+      .n3 {
+        background: linear-gradient(135deg, #43e97b, #38f9d7);
+      }
+      .n4 {
+        background: linear-gradient(135deg, #f7971e, #ffd200);
+      }
+      .n5 {
+        background: linear-gradient(135deg, #f953c6, #b91d73);
+      }
+      .n6 {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+      }
+      .n7 {
+        background: linear-gradient(135deg, #fa709a, #fee140);
+      }
+      .n8 {
+        background: linear-gradient(135deg, #30cfd0, #330867);
+        color: #fff;
+      }
+      .n9 {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      }
+      .n10 {
+        background: linear-gradient(135deg, #fda085, #f6d365);
+      }
+      .n11 {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+      }
+      .n12 {
+        background: linear-gradient(135deg, #11998e, #38ef7d);
+      }
+      .n13 {
+        background: linear-gradient(135deg, #c471f5, #fa71cd);
+      }
+
+      .section-title {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: clamp(20px, 3vw, 28px);
+        color: var(--text);
+      }
+
+      /* CARDS */
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin-bottom: 18px;
+      }
+      .card h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 700;
+        font-size: 17px;
+        color: var(--accent);
+        margin-bottom: 10px;
+      }
+      .card h4 {
+        font-weight: 700;
+        color: var(--accent4);
+        margin: 12px 0 6px;
+      }
+
+      /* DEFINITION BOX */
+      .def-box {
+        background: linear-gradient(
+          135deg,
+          rgba(108, 99, 255, 0.08),
+          rgba(108, 99, 255, 0.03)
+        );
+        border-left: 4px solid var(--accent);
+        border-radius: 0 12px 12px 0;
+        padding: 16px 20px;
+        margin: 14px 0;
+      }
+      .def-box .label {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+
+      /* IMPORTANT BOX */
+      .important {
+        background: rgba(255, 215, 0, 0.07);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin: 14px 0;
+      }
+      .important::before {
+        content: "⚡ IMPORTANT: ";
+        font-weight: 800;
+        color: var(--highlight);
+      }
+
+      /* TIP BOX */
+      .tip {
+        background: rgba(67, 233, 123, 0.07);
+        border: 1px solid rgba(67, 233, 123, 0.3);
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      .tip::before {
+        content: "💡 TIP: ";
+        font-weight: 800;
+        color: var(--accent3);
+      }
+
+      /* WARNING */
+      .warning {
+        background: rgba(255, 101, 132, 0.07);
+        border: 1px solid rgba(255, 101, 132, 0.3);
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      .warning::before {
+        content: "⚠️ COMMON MISTAKE: ";
+        font-weight: 800;
+        color: var(--accent2);
+      }
+
+      /* CODE BLOCKS */
+      pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        overflow-x: auto;
+        margin: 14px 0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      code {
+        font-family: "JetBrains Mono", monospace;
+      }
+      .kw {
+        color: #c792ea;
+      }
+      .cl {
+        color: #ffcb6b;
+      }
+      .st {
+        color: #c3e88d;
+      }
+      .cm {
+        color: #546e7a;
+        font-style: italic;
+      }
+      .num {
+        color: #f78c6c;
+      }
+      .fn {
+        color: #82aaff;
+      }
+      .out {
+        color: #43e97b;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0;
+        font-size: 14px;
+      }
+      th {
+        background: var(--border);
+        padding: 10px 14px;
+        text-align: left;
+        font-family: "Syne", sans-serif;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        color: var(--muted);
+      }
+      td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      tr:last-child td {
+        border-bottom: none;
+      }
+      tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* GRID */
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .grid3 {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+      }
+      @media (max-width: 640px) {
+        .grid2,
+        .grid3 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* MINI CARD */
+      .mini-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+      }
+      .mini-card .mc-title {
+        font-weight: 800;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+
+      /* QUESTION SOLUTION */
+      .q-solution {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0;
+        margin: 18px 0;
+        overflow: hidden;
+      }
+      .q-header {
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(255, 255, 255, 0.02);
+        border-bottom: 1px solid var(--border);
+      }
+      .q-badge {
+        background: var(--accent);
+        color: #fff;
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 800;
+        font-family: "Syne", sans-serif;
+        white-space: nowrap;
+      }
+      .q-badge.green {
+        background: var(--accent3);
+        color: #000;
+      }
+      .q-badge.orange {
+        background: var(--accent4);
+        color: #000;
+      }
+      .q-badge.pink {
+        background: var(--accent2);
+      }
+      .q-title {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .q-body {
+        padding: 20px;
+      }
+
+      /* MARKS BADGE */
+      .marks {
+        display: inline-block;
+        background: rgba(255, 215, 0, 0.15);
+        color: var(--highlight);
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        padding: 2px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-left: 8px;
+      }
+
+      /* PILLAR CARDS */
+      .pillar {
+        border-radius: 14px;
+        padding: 20px;
+        border: 1px solid;
+      }
+      .p1 {
+        background: rgba(108, 99, 255, 0.08);
+        border-color: rgba(108, 99, 255, 0.3);
+      }
+      .p2 {
+        background: rgba(255, 101, 132, 0.08);
+        border-color: rgba(255, 101, 132, 0.3);
+      }
+      .p3 {
+        background: rgba(67, 233, 123, 0.08);
+        border-color: rgba(67, 233, 123, 0.3);
+      }
+      .p4 {
+        background: rgba(247, 151, 30, 0.08);
+        border-color: rgba(247, 151, 30, 0.3);
+      }
+      .pillar h3 {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        margin-bottom: 8px;
+      }
+
+      /* CHEAT SHEET */
+      .cheat-item {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .cheat-item:last-child {
+        border-bottom: none;
+      }
+      .cheat-key {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        background: var(--code-bg);
+        color: var(--accent);
+        padding: 3px 8px;
+        border-radius: 6px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* MOCK TEST */
+      .mock-q {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin: 14px 0;
+      }
+      .mock-q .qnum {
+        font-family: "Syne", sans-serif;
+        font-weight: 800;
+        color: var(--accent4);
+        font-size: 13px;
+        margin-bottom: 8px;
+      }
+      .answer-toggle {
+        background: rgba(108, 99, 255, 0.15);
+        color: var(--accent);
+        border: 1px solid rgba(108, 99, 255, 0.3);
+        padding: 6px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 700;
+        margin-top: 10px;
+        border: none;
+        font-family: "Nunito", sans-serif;
+      }
+      .answer-toggle:hover {
+        background: rgba(108, 99, 255, 0.25);
+      }
+      .answer-reveal {
+        display: none;
+        margin-top: 12px;
+        background: rgba(67, 233, 123, 0.05);
+        border: 1px solid rgba(67, 233, 123, 0.2);
+        border-radius: 10px;
+        padding: 14px;
+      }
+      .answer-reveal.show {
+        display: block;
+      }
+
+      ul,
+      ol {
+        padding-left: 22px;
+      }
+      li {
+        margin-bottom: 5px;
+      }
+      strong {
+        color: var(--highlight);
+      }
+      p {
+        margin-bottom: 10px;
+      }
+
+      /* SCROLLBAR */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border);
+        border-radius: 3px;
+      }
+
+      .divider {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--accent),
+          transparent
+        );
+        margin: 40px 0;
+      }
+
+      .tag {
+        display: inline-block;
+        background: rgba(108, 99, 255, 0.15);
+        color: #a89cff;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 2px;
+      }
+      .tag.red {
+        background: rgba(255, 101, 132, 0.15);
+        color: #ff8ca5;
+      }
+      .tag.green {
+        background: rgba(67, 233, 123, 0.15);
+        color: #6ff5a0;
+      }
+      .tag.orange {
+        background: rgba(247, 151, 30, 0.15);
+        color: #fdb96a;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-title">📚 OOP Exam Guide</div>
+      <div class="nav-links">
+        <a href="#basics">Basics</a>
+        <a href="#constructors">Constructors</a>
+        <a href="#pillars">4 Pillars</a>
+        <a href="#exceptions">Exceptions</a>
+        <a href="#collections">Collections</a>
+        <a href="#enums">Enums</a>
+        <a href="#gui">GUI</a>
+        <a href="#qpaper">Q. Paper</a>
+        <a href="#cheatsheet">Cheat Sheet</a>
+        <a href="#mocktest">Mock Test</a>
+      </div>
+    </nav>
+
+    <div class="hero">
+      <h1>Java OOP — Complete Exam Guide</h1>
+      <p>
+        Built from your syllabus, teacher suggestions & both previous year
+        papers. Zero to exam-ready.
+      </p>
+      <div class="badge-row">
+        <span class="badge b1">Premier University</span>
+        <span class="badge b2">CSE 1115</span>
+        <span class="badge b3">3rd Semester</span>
+        <span class="badge b4">Fall 2024 + Spring 2025</span>
+        <span class="badge b5">Full Marks: 40</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- =================== SECTION 1: BASICS =================== -->
+      <div class="section" id="basics">
+        <div class="section-header">
+          <div class="section-num n1">1</div>
+          <div class="section-title">
+            Core Basics — Class, Object, Access Modifiers
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>What is a Class?</h3>
+          <p>
+            A <strong>class</strong> is a blueprint or template for creating
+            objects. Think of it like a "cookie cutter" — the class is the
+            cutter, and objects are the cookies.
+          </p>
+          <div class="def-box">
+            <div class="label">Definition</div>
+            A class defines <strong>attributes</strong> (data/variables) and
+            <strong>methods</strong> (functions/behavior).
+          </div>
+          <pre><span class="kw">public class</span> <span class="cl">Student</span> {
+    <span class="cm">// ATTRIBUTES (fields/variables)</span>
+    <span class="kw">String</span> name;
+    <span class="kw">int</span> age;
+    <span class="kw">double</span> gpa;
+
+    <span class="cm">// METHOD (behavior)</span>
+    <span class="kw">void</span> <span class="fn">study</span>() {
+        System.out.println(name + <span class="st">" is studying"</span>);
+    }
+}</pre>
+          <p>
+            To <strong>create an object</strong> (instance) from this class:
+          </p>
+          <pre><span class="cl">Student</span> s1 = <span class="kw">new</span> <span class="cl">Student</span>();  <span class="cm">// creating an object</span>
+s1.name = <span class="st">"Rahim"</span>;           <span class="cm">// setting attribute</span>
+s1.age = <span class="num">20</span>;
+s1.<span class="fn">study</span>();                  <span class="cm">// Output: Rahim is studying</span></pre>
+        </div>
+
+        <div class="card">
+          <h3>Access Modifiers — Who Can See What?</h3>
+          <p>
+            Access modifiers control the <strong>visibility</strong> of class
+            members.
+          </p>
+          <table>
+            <tr>
+              <th>Modifier</th>
+              <th>Same Class</th>
+              <th>Same Package</th>
+              <th>Subclass</th>
+              <th>Everywhere</th>
+            </tr>
+            <tr>
+              <td><code>private</code></td>
+              <td>✅</td>
+              <td>❌</td>
+              <td>❌</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td><code>default</code> (no keyword)</td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>❌</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td><code>protected</code></td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>❌</td>
+            </tr>
+            <tr>
+              <td><code>public</code></td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>✅</td>
+              <td>✅</td>
+            </tr>
+          </table>
+          <div class="tip">
+            private = most restricted. public = open to everyone. protected =
+            open to subclasses.
+          </div>
+          <pre><span class="kw">public class</span> <span class="cl">Person</span> {
+    <span class="kw">private</span> String name;   <span class="cm">// only accessible inside Person</span>
+    <span class="kw">protected</span> <span class="kw">int</span> age;    <span class="cm">// accessible in subclasses too</span>
+    <span class="kw">public</span> String city;   <span class="cm">// accessible everywhere</span>
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>static keyword</h3>
+          <p>
+            <strong>static</strong> means the variable/method belongs to the
+            <strong>CLASS itself</strong>, not to any specific object. All
+            objects <strong>share</strong> the same static variable.
+          </p>
+          <pre><span class="kw">public class</span> <span class="cl">StaticCounter</span> {
+    <span class="kw">static int</span> counter = <span class="num">0</span>;  <span class="cm">// shared by ALL objects</span>
+
+    <span class="kw">void</span> <span class="fn">incrementCounter</span>() {
+        counter++;
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cl">StaticCounter</span> obj1 = <span class="kw">new</span> <span class="cl">StaticCounter</span>();
+        <span class="cl">StaticCounter</span> obj2 = <span class="kw">new</span> <span class="cl">StaticCounter</span>();
+        obj1.<span class="fn">incrementCounter</span>();  <span class="cm">// counter = 1</span>
+        obj2.<span class="fn">incrementCounter</span>();  <span class="cm">// counter = 2 (same counter!)</span>
+        System.out.println(<span class="st">"Counter: "</span> + obj1.counter);
+        <span class="cm">// Output: Counter: 2</span>
+    }
+}</pre>
+          <div class="important">
+            Yes, you CAN change a static variable's value (unless it's also
+            final). Both obj1 and obj2 share the same counter, so the output is
+            <strong>Counter: 2</strong>.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>final keyword</h3>
+          <p>
+            <strong>final</strong> means the value CANNOT be changed after
+            assignment.
+          </p>
+          <pre><span class="kw">final int</span> MAX = <span class="num">100</span>;
+MAX = <span class="num">200</span>;  <span class="cm">// ❌ ERROR! Cannot change a final variable</span>
+
+<span class="kw">static final int</span> PI_APPROX = <span class="num">3</span>;  <span class="cm">// constant — shared AND unchangeable</span></pre>
+          <div class="tip">
+            static final = a CONSTANT. Use it for values that never change like
+            PI, MAX_SIZE, etc.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Getters & Setters (Accessors & Mutators)</h3>
+          <p>
+            Since attributes are usually <code>private</code>, we use
+            <strong>getters</strong> (to read) and <strong>setters</strong> (to
+            modify) them.
+          </p>
+          <ul>
+            <li>
+              <strong>Getter (Accessor)</strong> — returns the value of a
+              private attribute
+            </li>
+            <li>
+              <strong>Setter (Mutator)</strong> — sets/changes the value of a
+              private attribute
+            </li>
+          </ul>
+          <pre><span class="kw">public class</span> <span class="cl">Person</span> {
+    <span class="kw">private</span> String name;
+    <span class="kw">private int</span> age;
+
+    <span class="cm">// GETTER (Accessor)</span>
+    <span class="kw">public</span> String <span class="fn">getName</span>() {
+        <span class="kw">return</span> name;
+    }
+
+    <span class="cm">// SETTER (Mutator)</span>
+    <span class="kw">public void</span> <span class="fn">setName</span>(String name) {
+        <span class="kw">this</span>.name = name;  <span class="cm">// 'this' refers to current object</span>
+    }
+
+    <span class="kw">public int</span> <span class="fn">getAge</span>() { <span class="kw">return</span> age; }
+    <span class="kw">public void</span> <span class="fn">setAge</span>(<span class="kw">int</span> age) { <span class="kw">this</span>.age = age; }
+}
+
+<span class="cm">// Using getters & setters:</span>
+<span class="cl">Person</span> p = <span class="kw">new</span> <span class="cl">Person</span>();
+p.<span class="fn">setName</span>(<span class="st">"Rahim"</span>);
+System.out.println(p.<span class="fn">getName</span>()); <span class="cm">// Output: Rahim</span></pre>
+          <div class="def-box">
+            <div class="label">Why use getters & setters?</div>
+            To protect data. You can add validation inside setters. E.g., reject
+            negative age.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Reference vs Value — A Critical Concept (Q4 in both papers!)</h3>
+          <p>
+            In Java, objects are stored as <strong>references</strong> (like
+            addresses). When you do <code>obj2 = obj1</code>, BOTH point to the
+            <strong>same object</strong>!
+          </p>
+          <pre><span class="cm">// From Fall 2024 Q4a:</span>
+String name = <span class="st">"John"</span>;
+<span class="cl">Employee</span> employee1 = <span class="kw">new</span> <span class="cl">Employee</span>(name);
+<span class="cl">Employee</span> employee2 = employee1;  <span class="cm">// employee2 points to SAME object as employee1!</span>
+employee2.<span class="fn">setName</span>(<span class="st">"Doe"</span>);           <span class="cm">// Changes the SHARED object</span>
+String newName = employee1.<span class="fn">getName</span>(); <span class="cm">// What is newName?</span>
+<span class="cm">// Answer: "Doe" — because employee1 and employee2 are the same object!</span>
+
+<span class="cm">// From Spring 2025 Q4a:</span>
+<span class="kw">int</span> age = <span class="num">25</span>;
+<span class="cl">Person</span> person1 = <span class="kw">new</span> <span class="cl">Person</span>(age);
+<span class="cl">Person</span> person2 = person1;  <span class="cm">// SAME reference!</span>
+person2.<span class="fn">setAge</span>(<span class="num">30</span>);
+<span class="kw">int</span> newAge = person1.<span class="fn">getAge</span>(); <span class="cm">// Answer: 30</span></pre>
+          <div class="important">
+            person2 = person1 does NOT create a copy. They share the same
+            memory. Changes via person2 affect person1!
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 2: CONSTRUCTORS =================== -->
+      <div class="section" id="constructors">
+        <div class="section-header">
+          <div class="section-num n2">2</div>
+          <div class="section-title">
+            Constructors — Types & Constructor Overloading
+          </div>
+        </div>
+
+        <div class="def-box">
+          <div class="label">Definition</div>
+          A <strong>constructor</strong> is a special method that runs
+          automatically when an object is created. It has the
+          <strong>same name as the class</strong> and
+          <strong>no return type</strong>.
+        </div>
+
+        <div class="card">
+          <h3>3 Types of Constructors</h3>
+          <div class="grid3">
+            <div class="mini-card p1">
+              <div class="mc-title" style="color: #a89cff">
+                1. Default Constructor
+              </div>
+              No parameters. Sets default values.
+            </div>
+            <div class="mini-card p2">
+              <div class="mc-title" style="color: #ff8ca5">
+                2. Parameterized Constructor
+              </div>
+              Takes parameters to set values.
+            </div>
+            <div class="mini-card p3">
+              <div class="mc-title" style="color: #6ff5a0">
+                3. Copy Constructor
+              </div>
+              Takes another object and copies its values.
+            </div>
+          </div>
+
+          <pre><span class="kw">public class</span> <span class="cl">Book</span> {
+    String title;
+    String author;
+    <span class="kw">int</span> publicationYear;
+    <span class="kw">double</span> price;
+
+    <span class="cm">// 1. DEFAULT CONSTRUCTOR</span>
+    <span class="kw">public</span> <span class="fn">Book</span>() {
+        title = <span class="st">"Unknown"</span>;
+        author = <span class="st">"Unknown"</span>;
+        publicationYear = <span class="num">0</span>;
+        price = <span class="num">0.0</span>;
+    }
+
+    <span class="cm">// 2. PARAMETERIZED — title and author only</span>
+    <span class="kw">public</span> <span class="fn">Book</span>(String title, String author) {
+        <span class="kw">this</span>.title = title;
+        <span class="kw">this</span>.author = author;
+        <span class="kw">this</span>.publicationYear = <span class="num">0</span>;
+        <span class="kw">this</span>.price = <span class="num">0.0</span>;
+    }
+
+    <span class="cm">// 3. PARAMETERIZED — title, author, year</span>
+    <span class="kw">public</span> <span class="fn">Book</span>(String title, String author, <span class="kw">int</span> year) {
+        <span class="kw">this</span>.title = title;
+        <span class="kw">this</span>.author = author;
+        <span class="kw">this</span>.publicationYear = year;
+    }
+
+    <span class="cm">// 4. PARAMETERIZED — all four attributes</span>
+    <span class="kw">public</span> <span class="fn">Book</span>(String title, String author, <span class="kw">int</span> year, <span class="kw">double</span> price) {
+        <span class="kw">this</span>.title = title;
+        <span class="kw">this</span>.author = author;
+        <span class="kw">this</span>.publicationYear = year;
+        <span class="kw">this</span>.price = price;
+    }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        System.out.println(title + <span class="st">" by "</span> + author +
+            <span class="st">" ("</span> + publicationYear + <span class="st">") - $"</span> + price);
+    }
+}
+
+<span class="cm">// Creating objects with different constructors:</span>
+<span class="cl">Book</span> b1 = <span class="kw">new</span> <span class="cl">Book</span>();                          <span class="cm">// default</span>
+<span class="cl">Book</span> b2 = <span class="kw">new</span> <span class="cl">Book</span>(<span class="st">"Java"</span>, <span class="st">"James"</span>);          <span class="cm">// 2 params</span>
+<span class="cl">Book</span> b3 = <span class="kw">new</span> <span class="cl">Book</span>(<span class="st">"OOP"</span>, <span class="st">"Grady"</span>, <span class="num">2020</span>, <span class="num">29.99</span>); <span class="cm">// all 4</span>
+b1.<span class="fn">display</span>(); <span class="cm">// Unknown by Unknown (0) - $0.0</span>
+b3.<span class="fn">display</span>(); <span class="cm">// OOP by Grady (2020) - $29.99</span></pre>
+          <div class="tip">
+            Having multiple constructors with different parameters = Constructor
+            Overloading!
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Car Class (Spring 2025 Q3b) — Full Solution</h3>
+          <pre><span class="kw">public class</span> <span class="cl">Car</span> {
+    String make;
+    String model;
+    <span class="kw">int</span> year;
+    <span class="kw">double</span> price;
+
+    <span class="cm">// Default constructor</span>
+    <span class="kw">public</span> <span class="fn">Car</span>() {
+        make = <span class="st">"Unknown"</span>; model = <span class="st">"Unknown"</span>; year = <span class="num">0</span>; price = <span class="num">0.0</span>;
+    }
+
+    <span class="cm">// make + model</span>
+    <span class="kw">public</span> <span class="fn">Car</span>(String make, String model) {
+        <span class="kw">this</span>.make = make; <span class="kw">this</span>.model = model;
+    }
+
+    <span class="cm">// make + model + year</span>
+    <span class="kw">public</span> <span class="fn">Car</span>(String make, String model, <span class="kw">int</span> year) {
+        <span class="kw">this</span>.make = make; <span class="kw">this</span>.model = model; <span class="kw">this</span>.year = year;
+    }
+
+    <span class="cm">// All four</span>
+    <span class="kw">public</span> <span class="fn">Car</span>(String make, String model, <span class="kw">int</span> year, <span class="kw">double</span> price) {
+        <span class="kw">this</span>.make = make; <span class="kw">this</span>.model = model;
+        <span class="kw">this</span>.year = year; <span class="kw">this</span>.price = price;
+    }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        System.out.println(make + <span class="st">" "</span> + model + <span class="st">" "</span> + year + <span class="st">" $"</span> + price);
+    }
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cl">Car</span> c1 = <span class="kw">new</span> <span class="cl">Car</span>(<span class="st">"Toyota"</span>, <span class="st">"Corolla"</span>, <span class="num">2022</span>, <span class="num">25000</span>);
+        <span class="cl">Car</span> c2 = <span class="kw">new</span> <span class="cl">Car</span>(<span class="st">"Honda"</span>, <span class="st">"Civic"</span>);
+        c1.<span class="fn">display</span>(); <span class="cm">// Toyota Corolla 2022 $25000.0</span>
+        c2.<span class="fn">display</span>(); <span class="cm">// Honda Civic 0 $0.0</span>
+    }
+}</pre>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 3: 4 PILLARS =================== -->
+      <div class="section" id="pillars">
+        <div class="section-header">
+          <div class="section-num n3">3</div>
+          <div class="section-title">The 4 Pillars of OOP</div>
+        </div>
+
+        <div class="grid2" style="margin-bottom: 20px">
+          <div class="pillar p1">
+            <h3 style="color: #a89cff">🧱 Encapsulation</h3>
+            Wrapping data (attributes) and methods together in a class. Making
+            attributes <code>private</code> and providing public
+            getters/setters.
+          </div>
+          <div class="pillar p2">
+            <h3 style="color: #ff8ca5">🌿 Inheritance</h3>
+            A child class inherits attributes and methods from a parent class.
+            Keyword: <code>extends</code>.
+          </div>
+          <div class="pillar p3">
+            <h3 style="color: #6ff5a0">🎭 Polymorphism</h3>
+            One method, many forms. Method Overloading & Overriding. Dynamic
+            Dispatch.
+          </div>
+          <div class="pillar p4">
+            <h3 style="color: #fdb96a">🎨 Abstraction</h3>
+            Hiding implementation details. Using abstract classes and
+            interfaces.
+          </div>
+        </div>
+
+        <!-- INHERITANCE -->
+        <div class="card">
+          <h3>Inheritance — extends keyword</h3>
+          <p>
+            Child class gets all public/protected members of parent. Use
+            <code>super</code> to call parent's constructor/method.
+          </p>
+          <pre><span class="kw">public class</span> <span class="cl">Rectangle</span> {      <span class="cm">// PARENT class</span>
+    <span class="kw">double</span> length;
+    <span class="kw">double</span> width;
+
+    <span class="kw">public</span> <span class="fn">Rectangle</span>(<span class="kw">double</span> l, <span class="kw">double</span> w) {
+        length = l; width = w;
+    }
+    <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * width; }
+    <span class="kw">double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="num">2</span> * (length + width); }
+}
+
+<span class="kw">public class</span> <span class="cl">Square</span> <span class="kw">extends</span> <span class="cl">Rectangle</span> {  <span class="cm">// CHILD class</span>
+    <span class="kw">public</span> <span class="fn">Square</span>(<span class="kw">double</span> side) {
+        <span class="kw">super</span>(side, side);  <span class="cm">// calls Rectangle's constructor</span>
+    }
+
+    <span class="cm">// OVERRIDES the parent's area method</span>
+    <span class="kw">@Override</span>
+    <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * length; }
+
+    <span class="kw">@Override</span>
+    <span class="kw">double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="num">4</span> * length; }
+}
+
+<span class="cm">// Usage:</span>
+<span class="cl">Square</span> sq = <span class="kw">new</span> <span class="cl">Square</span>(<span class="num">5.0</span>);
+System.out.println(sq.<span class="fn">area</span>());      <span class="cm">// 25.0</span>
+System.out.println(sq.<span class="fn">perimeter</span>()); <span class="cm">// 20.0</span></pre>
+        </div>
+
+        <!-- POLYMORPHISM - OVERLOADING -->
+        <div class="card">
+          <h3>Polymorphism — Method Overloading vs Overriding</h3>
+          <div class="grid2">
+            <div>
+              <h4>Overloading (same class)</h4>
+              <p>
+                Same method name, <strong>different parameters</strong>. Decided
+                at compile time.
+              </p>
+              <pre><span class="kw">class</span> <span class="cl">Calculator</span> {
+  <span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+    <span class="kw">return</span> a + b;
+  }
+  <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b) {
+    <span class="kw">return</span> a + b;
+  }
+  <span class="cm">// Different parameter types = overloading</span>
+}</pre>
+            </div>
+            <div>
+              <h4>Overriding (parent-child)</h4>
+              <p>
+                Child redefines parent's method. Same name, same parameters.
+                <code>@Override</code>.
+              </p>
+              <pre><span class="kw">class</span> <span class="cl">Animal</span> {
+  <span class="kw">void</span> <span class="fn">sound</span>() {
+    System.out.println(<span class="st">"Generic sound"</span>);
+  }
+}
+<span class="kw">class</span> <span class="cl">Dog</span> <span class="kw">extends</span> <span class="cl">Animal</span> {
+  <span class="kw">@Override</span>
+  <span class="kw">void</span> <span class="fn">sound</span>() {
+    System.out.println(<span class="st">"Woof!"</span>);
+  }
+}</pre>
+            </div>
+          </div>
+
+          <h4>From Q2a (both papers) — Is this overloading or overriding?</h4>
+          <pre><span class="cm">// Fall 2024:</span>
+<span class="fn">calculateArea</span>(<span class="kw">double</span> radius)
+<span class="fn">calculateArea</span>(<span class="kw">int</span> length, <span class="kw">int</span> width)
+<span class="cm">// Answer: OVERLOADING — same class, different parameter types/count</span>
+
+<span class="cm">// Spring 2025:</span>
+<span class="fn">setLength</span>(<span class="kw">double</span> length)
+<span class="fn">setLength</span>(String length)
+<span class="cm">// Answer: OVERLOADING — same method name, different parameter types</span></pre>
+          <div class="important">
+            Overloading = same name, different parameters (in SAME class).
+            Overriding = same name, same parameters (in CHILD class).
+          </div>
+        </div>
+
+        <!-- DYNAMIC DISPATCH -->
+        <div class="card">
+          <h3>Dynamic Dispatch, Upcasting & Downcasting</h3>
+          <div class="def-box">
+            <div class="label">Dynamic Dispatch</div>
+            Java decides at <strong>runtime</strong> which version of an
+            overridden method to call, based on the
+            <strong>actual object type</strong> (not the reference type).
+          </div>
+          <pre><span class="cl">Animal</span> a = <span class="kw">new</span> <span class="cl">Dog</span>();  <span class="cm">// Upcasting: Dog stored in Animal reference</span>
+a.<span class="fn">sound</span>();  <span class="cm">// Output: "Woof!" — Dog's version is called (dynamic dispatch)</span>
+
+<span class="cm">// Downcasting: convert back to child type</span>
+<span class="cl">Dog</span> d = (<span class="cl">Dog</span>) a;  <span class="cm">// downcasting</span>
+d.<span class="fn">fetch</span>();  <span class="cm">// now you can call Dog-specific methods</span></pre>
+          <div class="tip">
+            Upcasting = storing child object in parent reference (automatic).
+            Downcasting = extracting back to child type (manual, needs cast).
+          </div>
+        </div>
+
+        <!-- ABSTRACT CLASS -->
+        <div class="card">
+          <h3>Abstract Class & Abstract Methods (Q5b in BOTH papers)</h3>
+          <div class="def-box">
+            <div class="label">Abstract Class</div>
+            Cannot be instantiated (can't create objects from it). May contain
+            abstract methods (methods without body that subclasses MUST
+            implement).
+          </div>
+          <pre><span class="kw">abstract class</span> <span class="cl">Shape</span> {       <span class="cm">// abstract class — keyword: abstract</span>
+    String color;
+
+    <span class="cm">// Abstract method — NO BODY, subclass must implement it</span>
+    <span class="kw">abstract double</span> <span class="fn">area</span>();
+
+    <span class="cm">// Non-abstract method — has a body</span>
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        System.out.println(<span class="st">"Color: "</span> + color);
+    }
+}
+
+<span class="kw">class</span> <span class="cl">Circle</span> <span class="kw">extends</span> <span class="cl">Shape</span> {   <span class="cm">// extends for abstract class</span>
+    <span class="kw">double</span> radius;
+
+    <span class="kw">public</span> <span class="fn">Circle</span>(<span class="kw">double</span> r) { radius = r; }
+
+    <span class="kw">@Override</span>
+    <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> Math.PI * radius * radius; }
+}
+
+<span class="kw">class</span> <span class="cl">Rectangle</span> <span class="kw">extends</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> length, width;
+
+    <span class="kw">public</span> <span class="fn">Rectangle</span>(<span class="kw">double</span> l, <span class="kw">double</span> w) { length = l; width = w; }
+
+    <span class="kw">@Override</span>
+    <span class="kw">double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * width; }
+}
+
+<span class="cm">// Shape s = new Shape(); ❌ CANNOT instantiate abstract class</span>
+<span class="cl">Shape</span> c = <span class="kw">new</span> <span class="cl">Circle</span>(<span class="num">5.0</span>); <span class="cm">// ✅ upcasting</span>
+System.out.println(c.<span class="fn">area</span>()); <span class="cm">// 78.53...</span></pre>
+        </div>
+
+        <!-- INTERFACE -->
+        <div class="card">
+          <h3>Interface (Q6b in BOTH papers)</h3>
+          <div class="def-box">
+            <div class="label">Interface</div>
+            Like a contract. A class that <strong>implements</strong> an
+            interface MUST provide all its methods. Keyword:
+            <code>implements</code> (not extends!). All methods are abstract by
+            default.
+          </div>
+          <pre><span class="kw">interface</span> <span class="cl">Shape</span> {             <span class="cm">// interface keyword</span>
+    <span class="kw">double</span> <span class="fn">area</span>();            <span class="cm">// abstract by default (no abstract keyword needed)</span>
+    <span class="kw">double</span> <span class="fn">perimeter</span>();
+}
+
+<span class="kw">class</span> <span class="cl">Circle</span> <span class="kw">implements</span> <span class="cl">Shape</span> {  <span class="cm">// implements keyword!</span>
+    <span class="kw">double</span> radius;
+    <span class="kw">Circle</span>(<span class="kw">double</span> r) { radius = r; }
+
+    <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> Math.PI * radius * radius; }
+    <span class="kw">public double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="num">2</span> * Math.PI * radius; }
+}
+
+<span class="kw">class</span> <span class="cl">Rectangle</span> <span class="kw">implements</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> length, width;
+    <span class="kw">Rectangle</span>(<span class="kw">double</span> l, <span class="kw">double</span> w) { length = l; width = w; }
+
+    <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * width; }
+    <span class="kw">public double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="num">2</span> * (length + width); }
+}</pre>
+          <table>
+            <tr>
+              <th>Feature</th>
+              <th>Abstract Class</th>
+              <th>Interface</th>
+            </tr>
+            <tr>
+              <td>Keyword</td>
+              <td>abstract class + extends</td>
+              <td>interface + implements</td>
+            </tr>
+            <tr>
+              <td>Methods</td>
+              <td>Can have regular + abstract</td>
+              <td>All abstract (by default)</td>
+            </tr>
+            <tr>
+              <td>Variables</td>
+              <td>Any type</td>
+              <td>Only constants (static final)</td>
+            </tr>
+            <tr>
+              <td>Multiple inheritance</td>
+              <td>No (only one parent)</td>
+              <td>Yes (can implement multiple)</td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- POLYMORPHISM WITH COLLECTIONS -->
+        <div class="card">
+          <h3>
+            Polymorphism with LinkedList (Q1b — BOTH papers, most important!)
+          </h3>
+          <pre><span class="kw">import</span> java.util.LinkedList;
+
+<span class="cm">// Fall 2024 Q1b — Shape/Rectangle/Triangle/Circle</span>
+<span class="kw">interface</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> <span class="fn">area</span>();
+}
+
+<span class="kw">class</span> <span class="cl">Rectangle</span> <span class="kw">implements</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> length, width;
+    <span class="kw">Rectangle</span>(<span class="kw">double</span> length, <span class="kw">double</span> width) {
+        <span class="kw">this</span>.length = length; <span class="kw">this</span>.width = width;
+    }
+    <span class="kw">Rectangle</span>(<span class="kw">double</span> length) { <span class="kw">this</span>.length = length; <span class="kw">this</span>.width = <span class="num">0</span>; }
+    <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> length * width; }
+}
+
+<span class="kw">class</span> <span class="cl">Triangle</span> <span class="kw">implements</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> base, height;
+    <span class="kw">Triangle</span>(<span class="kw">double</span> base, <span class="kw">double</span> height) {
+        <span class="kw">this</span>.base = base; <span class="kw">this</span>.height = height;
+    }
+    <span class="kw">Triangle</span>(<span class="kw">double</span> base) { <span class="kw">this</span>.base = base; <span class="kw">this</span>.height = <span class="num">0</span>; }
+    <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> <span class="num">0.5</span> * base * height; }
+}
+
+<span class="kw">class</span> <span class="cl">Circle</span> <span class="kw">implements</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> radius;
+    <span class="kw">Circle</span>(<span class="kw">double</span> radius) { <span class="kw">this</span>.radius = radius; }
+    <span class="kw">Circle</span>() { <span class="kw">this</span>.radius = <span class="num">0</span>; }
+    <span class="kw">public double</span> <span class="fn">area</span>() { <span class="kw">return</span> Math.PI * radius * radius; }
+}
+
+<span class="kw">class</span> <span class="cl">Shapes</span> {
+    LinkedList&lt;<span class="cl">Shape</span>&gt; shapeList;
+
+    <span class="kw">public</span> <span class="fn">Shapes</span>() {
+        <span class="cm">// i. Declare the linked list</span>
+        shapeList = <span class="kw">new</span> LinkedList&lt;&gt;();
+
+        <span class="cm">// ii. Create 5 objects: 2 Rectangle, 2 Triangle, 1 Circle</span>
+        shapeList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Rectangle</span>(<span class="num">5.0</span>, <span class="num">3.0</span>));
+        shapeList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Rectangle</span>(<span class="num">4.0</span>));         <span class="cm">// one param, width = null/0</span>
+        shapeList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Triangle</span>(<span class="num">6.0</span>, <span class="num">4.0</span>));
+        shapeList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Triangle</span>(<span class="num">3.0</span>));          <span class="cm">// one param, height = 0</span>
+        shapeList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Circle</span>(<span class="num">7.0</span>));
+
+        <span class="cm">// iii. Access area() for each object</span>
+        <span class="kw">for</span> (<span class="cl">Shape</span> s : shapeList) {
+            System.out.println(<span class="st">"Area: "</span> + s.<span class="fn">area</span>());
+        }
+    }
+}</pre>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 4: EXCEPTIONS =================== -->
+      <div class="section" id="exceptions">
+        <div class="section-header">
+          <div class="section-num n4">4</div>
+          <div class="section-title">Exception Handling</div>
+        </div>
+
+        <div class="card">
+          <h3>What is an Exception?</h3>
+          <p>
+            An exception is an <strong>unexpected error</strong> that occurs
+            during program execution. Without handling, the program crashes.
+          </p>
+          <div class="grid3">
+            <div class="mini-card p1">
+              <div class="mc-title" style="color: #a89cff">
+                Checked Exceptions
+              </div>
+              Must be handled. E.g., IOException, FileNotFoundException
+            </div>
+            <div class="mini-card p2">
+              <div class="mc-title" style="color: #ff8ca5">
+                Unchecked Exceptions
+              </div>
+              Runtime errors. E.g., NullPointerException,
+              ArrayIndexOutOfBoundsException
+            </div>
+            <div class="mini-card p3">
+              <div class="mc-title" style="color: #6ff5a0">Errors</div>
+              Serious problems. E.g., OutOfMemoryError. Cannot usually be
+              handled.
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>try-catch-finally Structure</h3>
+          <pre><span class="kw">try</span> {
+    <span class="cm">// Code that might throw an exception</span>
+    <span class="kw">int</span>[] arr = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>};
+    System.out.println(arr[<span class="num">10</span>]);  <span class="cm">// ArrayIndexOutOfBoundsException!</span>
+}
+<span class="kw">catch</span> (ArrayIndexOutOfBoundsException e) {
+    <span class="cm">// Handle the exception here</span>
+    System.out.println(<span class="st">"Error: Index out of range!"</span>);
+}
+<span class="kw">finally</span> {
+    <span class="cm">// This ALWAYS runs, whether exception occurred or not</span>
+    System.out.println(<span class="st">"This always runs."</span>);
+}</pre>
+
+          <h4>Multiple catch blocks:</h4>
+          <pre><span class="kw">try</span> {
+    <span class="kw">int</span>[] arr = {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>};
+    <span class="kw">int</span> result = arr[<span class="num">0</span>] / <span class="num">0</span>;  <span class="cm">// ArithmeticException (div by zero)</span>
+    System.out.println(arr[<span class="num">10</span>]); <span class="cm">// ArrayIndexOutOfBoundsException</span>
+}
+<span class="kw">catch</span> (ArithmeticException e) {
+    System.out.println(<span class="st">"Arithmetic error: "</span> + e.getMessage());
+}
+<span class="kw">catch</span> (ArrayIndexOutOfBoundsException e) {
+    System.out.println(<span class="st">"Array index out of range!"</span>);
+}
+<span class="kw">finally</span> {
+    System.out.println(<span class="st">"Done."</span>);
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>Q1c Solution — ArrayIndexOutOfBoundsException (BOTH papers)</h3>
+          <pre><span class="cm">// The given code had index = 5, but array has indices 0-4 (5 elements)</span>
+<span class="kw">void</span> <span class="fn">arrayIndexException</span>() {
+    <span class="kw">try</span> {
+        <span class="kw">int</span>[] myArray = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};
+        <span class="kw">int</span> index = <span class="num">5</span>;  <span class="cm">// ❌ Invalid! Valid: 0,1,2,3,4</span>
+        <span class="kw">int</span> value = myArray[index];
+        System.out.println(<span class="st">"Value at index "</span> + index + <span class="st">": "</span> + value);
+    }
+    <span class="kw">catch</span> (ArrayIndexOutOfBoundsException e) {
+        System.out.println(<span class="st">"ArrayIndexOutOfBoundsException: The specified index is out of range."</span>);
+    }
+}
+<span class="cm">// i. With index=5: Exception is caught. Prints the catch message.</span>
+<span class="cm">// ii. Change index to 3 (valid): Output: "Value at index 3: 40"</span>
+
+<span class="cm">// iii. Multiple exceptions including ArithmeticException:</span>
+<span class="kw">void</span> <span class="fn">multipleExceptions</span>() {
+    <span class="kw">try</span> {
+        <span class="kw">int</span>[] myArray = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};
+        <span class="kw">int</span> result = myArray[<span class="num">2</span>] / <span class="num">0</span>;  <span class="cm">// ArithmeticException</span>
+        System.out.println(myArray[<span class="num">10</span>]);   <span class="cm">// ArrayIndexOutOfBoundsException</span>
+    }
+    <span class="kw">catch</span> (ArithmeticException e) {
+        System.out.println(<span class="st">"Cannot divide by zero!"</span>);
+    }
+    <span class="kw">catch</span> (ArrayIndexOutOfBoundsException e) {
+        System.out.println(<span class="st">"Index out of range!"</span>);
+    }
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>NullPointerException with try-catch-finally (Q4c Fall 2024)</h3>
+          <pre><span class="kw">public void</span> <span class="fn">handleNull</span>() {
+    String str = <span class="kw">null</span>;
+    <span class="kw">try</span> {
+        System.out.println(str.<span class="fn">length</span>()); <span class="cm">// NullPointerException!</span>
+    }
+    <span class="kw">catch</span> (NullPointerException e) {
+        System.out.println(<span class="st">"NullPointerException: Object is null!"</span>);
+    }
+    <span class="kw">finally</span> {
+        System.out.println(<span class="st">"This runs regardless of exception."</span>);
+    }
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>Exception with User Input Loop (Q6c — BOTH papers)</h3>
+          <pre><span class="kw">import</span> java.util.Scanner;
+
+<span class="kw">public static void</span> <span class="fn">multiplyWithExceptionHandling</span>() {
+    Scanner scanner = <span class="kw">new</span> Scanner(System.in);
+    <span class="kw">boolean</span> validInput = <span class="kw">false</span>;
+
+    <span class="kw">while</span> (!validInput) {
+        <span class="kw">try</span> {
+            System.out.print(<span class="st">"Enter first number: "</span>);
+            <span class="kw">int</span> a = Integer.<span class="fn">parseInt</span>(scanner.<span class="fn">nextLine</span>());
+
+            System.out.print(<span class="st">"Enter second number: "</span>);
+            <span class="kw">int</span> b = Integer.<span class="fn">parseInt</span>(scanner.<span class="fn">nextLine</span>());
+
+            <span class="kw">long</span> result = (<span class="kw">long</span>) a * b;
+
+            <span class="cm">// Check for overflow</span>
+            <span class="kw">if</span> (result > Integer.MAX_VALUE) {
+                <span class="kw">throw new</span> ArithmeticException(<span class="st">"Number overflow!"</span>);
+            }
+            System.out.println(<span class="st">"Result: "</span> + result);
+            validInput = <span class="kw">true</span>;  <span class="cm">// exit loop</span>
+        }
+        <span class="kw">catch</span> (NumberFormatException e) {
+            System.out.println(<span class="st">"Invalid input! Please enter a number."</span>);
+        }
+        <span class="kw">catch</span> (ArithmeticException e) {
+            System.out.println(<span class="st">"Error: "</span> + e.getMessage());
+        }
+    }
+}</pre>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 5: COLLECTIONS =================== -->
+      <div class="section" id="collections">
+        <div class="section-header">
+          <div class="section-num n5">5</div>
+          <div class="section-title">Java Collections Framework</div>
+        </div>
+
+        <div class="card">
+          <h3>List, Set, Map — When to use which?</h3>
+          <table>
+            <tr>
+              <th>Collection</th>
+              <th>Ordered?</th>
+              <th>Duplicates?</th>
+              <th>Key-Value?</th>
+              <th>Use When</th>
+            </tr>
+            <tr>
+              <td><strong>List</strong> (ArrayList, LinkedList)</td>
+              <td>✅ Yes</td>
+              <td>✅ Yes</td>
+              <td>❌</td>
+              <td>Order matters & duplicates allowed</td>
+            </tr>
+            <tr>
+              <td><strong>Set</strong> (HashSet)</td>
+              <td>❌ No</td>
+              <td>❌ No</td>
+              <td>❌</td>
+              <td>Uniqueness required (no duplicates)</td>
+            </tr>
+            <tr>
+              <td><strong>Map</strong> (HashMap)</td>
+              <td>❌ No</td>
+              <td>Keys: No, Values: Yes</td>
+              <td>✅</td>
+              <td>Store and retrieve by key</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Code Examples for List, Set, Map</h3>
+          <pre><span class="kw">import</span> java.util.*;
+
+<span class="cm">// LIST — ordered, allows duplicates</span>
+List&lt;String&gt; names = <span class="kw">new</span> ArrayList&lt;&gt;();
+names.<span class="fn">add</span>(<span class="st">"Alice"</span>);
+names.<span class="fn">add</span>(<span class="st">"Bob"</span>);
+names.<span class="fn">add</span>(<span class="st">"Alice"</span>);  <span class="cm">// duplicate allowed</span>
+System.out.println(names); <span class="cm">// [Alice, Bob, Alice]</span>
+
+<span class="cm">// SET — no duplicates</span>
+Set&lt;String&gt; uniqueNames = <span class="kw">new</span> HashSet&lt;&gt;();
+uniqueNames.<span class="fn">add</span>(<span class="st">"Alice"</span>);
+uniqueNames.<span class="fn">add</span>(<span class="st">"Bob"</span>);
+uniqueNames.<span class="fn">add</span>(<span class="st">"Alice"</span>);  <span class="cm">// ignored! duplicate</span>
+System.out.println(uniqueNames); <span class="cm">// [Alice, Bob] (order may vary)</span>
+
+<span class="cm">// MAP — key-value pairs</span>
+Map&lt;String, Integer&gt; scores = <span class="kw">new</span> HashMap&lt;&gt;();
+scores.<span class="fn">put</span>(<span class="st">"Alice"</span>, <span class="num">90</span>);
+scores.<span class="fn">put</span>(<span class="st">"Bob"</span>, <span class="num">85</span>);
+System.out.println(scores.<span class="fn">get</span>(<span class="st">"Alice"</span>)); <span class="cm">// 90</span></pre>
+        </div>
+
+        <div class="card">
+          <h3>Iterator — What is it? (Q2c — BOTH papers)</h3>
+          <div class="def-box">
+            <div class="label">Iterator</div>
+            An object that lets you <strong>traverse (go through)</strong> a
+            collection one element at a time. Methods: <code>hasNext()</code> —
+            returns true if more elements exist. <code>next()</code> — returns
+            the next element.
+          </div>
+          <div class="grid2">
+            <div>
+              <h4>Loop approach:</h4>
+              <pre><span class="kw">for</span> (String s : names) {
+    System.out.println(s);
+}
+<span class="cm">// Simple, but can't remove elements safely</span></pre>
+            </div>
+            <div>
+              <h4>Iterator approach:</h4>
+              <pre>Iterator&lt;String&gt; it = names.<span class="fn">iterator</span>();
+<span class="kw">while</span> (it.<span class="fn">hasNext</span>()) {
+    String s = it.<span class="fn">next</span>();
+    System.out.println(s);
+}
+<span class="cm">// Can safely remove elements</span></pre>
+            </div>
+          </div>
+
+          <h4>Q2c iii — for-each on HashSet "courses" (Fall 2024):</h4>
+          <pre>HashSet&lt;<span class="cl">Course</span>&gt; courses = <span class="kw">new</span> HashSet&lt;&gt;();
+<span class="cm">// ... add courses ...</span>
+
+<span class="kw">for</span> (<span class="cl">Course</span> course : courses) {
+    System.out.println(course);  <span class="cm">// access each Course element</span>
+}
+
+<span class="cm">// Spring 2025 Q2c iii — for-each on LinkedList "agents":</span>
+LinkedList&lt;<span class="cl">Agent</span>&gt; agents = <span class="kw">new</span> LinkedList&lt;&gt;();
+<span class="kw">for</span> (<span class="cl">Agent</span> agent : agents) {
+    System.out.println(agent);
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>Enum Q2b — Day (Fall 2024) & Suit (Spring 2025)</h3>
+          <pre><span class="cm">// Fall 2024 Q2b — Print each day with its type</span>
+<span class="kw">for</span> (<span class="cl">Day</span> d : Day.<span class="fn">values</span>()) {
+    System.out.println(d + <span class="st">": "</span> + d.<span class="fn">getType</span>());
+}
+<span class="cm">// Output:
+// MONDAY: Weekday
+// TUESDAY: Weekday
+// ...
+// SATURDAY: Weekend
+// SUNDAY: Weekend</span>
+
+<span class="cm">// Spring 2025 Q2b — Access getColour() for each Suit</span>
+<span class="kw">for</span> (<span class="cl">Suit</span> s : Suit.<span class="fn">values</span>()) {
+    System.out.println(s + <span class="st">": "</span> + s.<span class="fn">getColour</span>());
+}
+<span class="cm">// Output:
+// DIAMONDS: Red
+// CLUBS: Black
+// HEARTS: Red
+// SPADES: Black</span></pre>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 6: ENUMS =================== -->
+      <div class="section" id="enums">
+        <div class="section-header">
+          <div class="section-num n6">6</div>
+          <div class="section-title">Enums</div>
+        </div>
+
+        <div class="card">
+          <h3>What is an Enum?</h3>
+          <div class="def-box">
+            <div class="label">Enum</div>
+            A special type that represents a fixed set of constants. Like a list
+            of named values that cannot change. Example: Days of the week,
+            Seasons, Card suits.
+          </div>
+          <pre><span class="cm">// Simple enum</span>
+<span class="kw">enum</span> <span class="cl">Season</span> { SPRING, SUMMER, AUTUMN, WINTER }
+
+<span class="cl">Season</span> s = <span class="cl">Season</span>.SUMMER;
+System.out.println(s); <span class="cm">// SUMMER</span>
+
+<span class="cm">// =============================================</span>
+<span class="cm">// Complex enum WITH constructor (from exam)</span>
+<span class="kw">public enum</span> <span class="cl">Day</span> {
+    MONDAY(<span class="st">"Weekday"</span>),
+    TUESDAY(<span class="st">"Weekday"</span>),
+    WEDNESDAY(<span class="st">"Weekday"</span>),
+    THURSDAY(<span class="st">"Weekday"</span>),
+    FRIDAY(<span class="st">"Weekday"</span>),
+    SATURDAY(<span class="st">"Weekend"</span>),
+    SUNDAY(<span class="st">"Weekend"</span>);
+
+    <span class="kw">private final</span> String type;  <span class="cm">// attribute</span>
+
+    <span class="kw">private</span> <span class="fn">Day</span>(String type) {  <span class="cm">// constructor</span>
+        <span class="kw">this</span>.type = type;
+    }
+
+    <span class="kw">public</span> String <span class="fn">getType</span>() {   <span class="cm">// getter/method</span>
+        <span class="kw">return</span> type;
+    }
+}
+
+<span class="cm">// Print all days with their type:</span>
+<span class="kw">for</span> (<span class="cl">Day</span> d : Day.<span class="fn">values</span>()) {
+    System.out.println(d.name() + <span class="st">": "</span> + d.<span class="fn">getType</span>());
+}</pre>
+          <div class="tip">
+            Key methods: <code>values()</code> — returns all constants,
+            <code>name()</code> — returns name as String,
+            <code>ordinal()</code> — returns position (0-based)
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 7: GUI =================== -->
+      <div class="section" id="gui">
+        <div class="section-header">
+          <div class="section-num n7">7</div>
+          <div class="section-title">GUI — Java Swing & MVC Theory</div>
+        </div>
+
+        <div class="card">
+          <h3>Swing Components (Q5c — BOTH papers)</h3>
+          <table>
+            <tr>
+              <th>Component</th>
+              <th>What it is</th>
+              <th>Common Methods</th>
+            </tr>
+            <tr>
+              <td><code>JFrame</code></td>
+              <td>Main window</td>
+              <td>setTitle(), setSize(), setVisible()</td>
+            </tr>
+            <tr>
+              <td><code>JPanel</code></td>
+              <td>Container/area to group components</td>
+              <td>add(), setLayout()</td>
+            </tr>
+            <tr>
+              <td><code>JLabel</code></td>
+              <td>Text display (non-editable)</td>
+              <td>setText(), getText()</td>
+            </tr>
+            <tr>
+              <td><code>JButton</code></td>
+              <td>Clickable button</td>
+              <td>addActionListener()</td>
+            </tr>
+            <tr>
+              <td><code>JTextField</code></td>
+              <td>Single-line text input</td>
+              <td>setText(), getText()</td>
+            </tr>
+          </table>
+
+          <h4>Q5c Solutions — Both Papers:</h4>
+          <pre><span class="kw">import</span> javax.swing.*;
+
+<span class="cm">// Fall 2024 Q5c:</span>
+<span class="cm">// i. Create a button called "submit" with label "Submit"</span>
+<span class="cl">JButton</span> submit = <span class="kw">new</span> <span class="cl">JButton</span>(<span class="st">"Submit"</span>);
+
+<span class="cm">// ii. Set text "Welcome User" in JTextField called inputField</span>
+<span class="cl">JTextField</span> inputField = <span class="kw">new</span> <span class="cl">JTextField</span>();
+inputField.<span class="fn">setText</span>(<span class="st">"Welcome User"</span>);
+
+<span class="cm">// iii. Add JLabel called emailLabel to panel called formPanel</span>
+<span class="cl">JLabel</span> emailLabel = <span class="kw">new</span> <span class="cl">JLabel</span>(<span class="st">"Email:"</span>);
+<span class="cl">JPanel</span> formPanel = <span class="kw">new</span> <span class="cl">JPanel</span>();
+formPanel.<span class="fn">add</span>(emailLabel);
+
+<span class="cm">// ================================================================</span>
+<span class="cm">// Spring 2025 Q5c:</span>
+<span class="cm">// i. Button called "cancel" with label "Cancel"</span>
+<span class="cl">JButton</span> cancel = <span class="kw">new</span> <span class="cl">JButton</span>(<span class="st">"Cancel"</span>);
+
+<span class="cm">// ii. Set text "Hello" in JTextField called "field"</span>
+<span class="cl">JTextField</span> field = <span class="kw">new</span> <span class="cl">JTextField</span>();
+field.<span class="fn">setText</span>(<span class="st">"Hello"</span>);
+
+<span class="cm">// iii. Add JLabel called "name" to panel called "userPanel"</span>
+<span class="cl">JLabel</span> name = <span class="kw">new</span> <span class="cl">JLabel</span>(<span class="st">"Name:"</span>);
+<span class="cl">JPanel</span> userPanel = <span class="kw">new</span> <span class="cl">JPanel</span>();
+userPanel.<span class="fn">add</span>(name);</pre>
+        </div>
+
+        <div class="card">
+          <h3>MVC Theory — Model-View-Controller</h3>
+          <div class="def-box">
+            <div class="label">MVC Pattern</div>
+            A design pattern that separates an application into 3 parts to keep
+            code organized and maintainable.
+          </div>
+          <div class="grid3">
+            <div class="mini-card p1">
+              <div class="mc-title" style="color: #a89cff">Model (Data)</div>
+              Contains the data and business logic. No UI code here. Example:
+              Student class with name, grade.
+            </div>
+            <div class="mini-card p3">
+              <div class="mc-title" style="color: #6ff5a0">View (UI)</div>
+              What the user sees. Displays data from Model. Example: JFrame,
+              JPanel, JLabel.
+            </div>
+            <div class="mini-card p4">
+              <div class="mc-title" style="color: #fdb96a">
+                Controller (Logic)
+              </div>
+              Handles user input. Connects Model and View. Updates Model, tells
+              View to refresh.
+            </div>
+          </div>
+          <p style="margin-top: 14px">
+            <strong>Flow:</strong> User interacts with <strong>View</strong> →
+            <strong>Controller</strong> processes the action → updates
+            <strong>Model</strong> → <strong>View</strong> shows updated data.
+          </p>
+          <div class="tip">
+            Example: In a login form — the form is View, login button triggers
+            Controller, user credentials are checked in Model (database).
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 8: METHOD CALLS =================== -->
+      <div class="section" id="methodcalls">
+        <div class="section-header">
+          <div class="section-num n8">8</div>
+          <div class="section-title">
+            Q3a — Calling Methods & Return Statements (Both Papers)
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>How to Call display()/show() From Outside</h3>
+          <pre><span class="cm">// Fall 2024 Q3a — given code:</span>
+<span class="kw">public void</span> <span class="fn">display</span>(<span class="cl">Person</span> p1) {
+    p1.<span class="fn">display</span>();
+}
+
+<span class="cm">// Q: How to call display() from OUTSIDE the method?</span>
+<span class="cl">Person</span> p = <span class="kw">new</span> <span class="cl">Person</span>();  <span class="cm">// create Person object</span>
+<span class="fn">display</span>(p);               <span class="cm">// call the method, passing the object</span>
+
+<span class="cm">// Q: If display() is non-void (returns int), rewrite it:</span>
+<span class="kw">public int</span> <span class="fn">display</span>(<span class="cl">Person</span> p1) {
+    <span class="kw">return</span> p1.<span class="fn">display</span>();  <span class="cm">// use return keyword</span>
+}
+
+<span class="cm">// =======================================</span>
+<span class="cm">// Spring 2025 Q3a — same pattern with Student/show():</span>
+<span class="kw">public void</span> <span class="fn">show</span>(<span class="cl">Student</span> s1) {
+    s1.<span class="fn">show</span>();
+}
+<span class="cm">// Call from outside:</span>
+<span class="cl">Student</span> s = <span class="kw">new</span> <span class="cl">Student</span>();
+<span class="fn">show</span>(s);
+
+<span class="cm">// If show() returns int:</span>
+<span class="kw">public int</span> <span class="fn">show</span>(<span class="cl">Student</span> s1) {
+    <span class="kw">return</span> s1.<span class="fn">show</span>();
+}</pre>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 9: JAVA CODING =================== -->
+      <div class="section" id="javacode">
+        <div class="section-header">
+          <div class="section-num n9">9</div>
+          <div class="section-title">
+            General Java Coding — if-else, switch, loops, arrays
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Selection — if-else and switch</h3>
+          <pre><span class="cm">// if-else</span>
+<span class="kw">int</span> score = <span class="num">75</span>;
+<span class="kw">if</span> (score >= <span class="num">80</span>) {
+    System.out.println(<span class="st">"A"</span>);
+} <span class="kw">else if</span> (score >= <span class="num">70</span>) {
+    System.out.println(<span class="st">"B"</span>);
+} <span class="kw">else</span> {
+    System.out.println(<span class="st">"C"</span>);
+}
+
+<span class="cm">// switch</span>
+<span class="kw">int</span> day = <span class="num">2</span>;
+<span class="kw">switch</span> (day) {
+    <span class="kw">case</span> <span class="num">1</span>: System.out.println(<span class="st">"Monday"</span>); <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="num">2</span>: System.out.println(<span class="st">"Tuesday"</span>); <span class="kw">break</span>;
+    <span class="kw">default</span>: System.out.println(<span class="st">"Other"</span>);
+}</pre>
+        </div>
+
+        <div class="card">
+          <h3>Loops & Array Operations</h3>
+          <pre><span class="kw">int</span>[] arr = {<span class="num">5</span>, <span class="num">3</span>, <span class="num">8</span>, <span class="num">1</span>, <span class="num">9</span>, <span class="num">2</span>};
+
+<span class="cm">// Sum of array</span>
+<span class="kw">int</span> sum = <span class="num">0</span>;
+<span class="kw">for</span> (<span class="kw">int</span> x : arr) sum += x;
+System.out.println(<span class="st">"Sum: "</span> + sum); <span class="cm">// 28</span>
+
+<span class="cm">// Find max</span>
+<span class="kw">int</span> max = arr[<span class="num">0</span>];
+<span class="kw">for</span> (<span class="kw">int</span> x : arr) <span class="kw">if</span> (x > max) max = x;
+System.out.println(<span class="st">"Max: "</span> + max); <span class="cm">// 9</span>
+
+<span class="cm">// BUBBLE SORT (marked *** in suggestions!)</span>
+<span class="kw">for</span> (<span class="kw">int</span> i = <span class="num">0</span>; i &lt; arr.length - <span class="num">1</span>; i++) {
+    <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; arr.length - i - <span class="num">1</span>; j++) {
+        <span class="kw">if</span> (arr[j] > arr[j+<span class="num">1</span>]) {
+            <span class="kw">int</span> temp = arr[j];     <span class="cm">// swap</span>
+            arr[j] = arr[j+<span class="num">1</span>];
+            arr[j+<span class="num">1</span>] = temp;
+        }
+    }
+}
+<span class="cm">// arr is now: {1, 2, 3, 5, 8, 9}</span>
+System.out.println(Arrays.<span class="fn">toString</span>(arr));</pre>
+          <div class="important">
+            Bubble Sort was marked *** by teacher. Remember: outer loop =
+            passes, inner loop = comparisons, swap if left > right.
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== SECTION 10: QUESTION PAPER SOLUTIONS =================== -->
+      <div class="section" id="qpaper">
+        <div class="section-header">
+          <div class="section-num n10">10</div>
+          <div class="section-title">Complete Question Paper Solutions</div>
+        </div>
+
+        <p style="color: var(--muted); margin-bottom: 20px">
+          Both Fall 2024 and Spring 2025 papers are almost identical in
+          structure. Solutions below cover both.
+        </p>
+
+        <!-- Q1a -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge">Q1a</span>
+            <div class="q-title">
+              Access Modifiers + static final <span class="marks">2 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              <strong>Access modifiers</strong> control visibility:
+              <code>private</code> (own class only), <code>default</code> (same
+              package), <code>protected</code> (subclasses),
+              <code>public</code> (everywhere).
+            </p>
+            <p>
+              <strong>static final</strong> = a constant. Once assigned, it
+              CANNOT be changed. It's shared across all instances.
+            </p>
+            <pre><span class="kw">public class</span> <span class="cl">Demo</span> {
+    <span class="kw">public static final int</span> MAX_SIZE = <span class="num">100</span>;
+
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        System.out.println(MAX_SIZE); <span class="cm">// 100 — can access</span>
+        <span class="cm">// MAX_SIZE = 200; ❌ ERROR: cannot change final</span>
+    }
+}</pre>
+            <p>
+              <strong>Justification:</strong> <code>static</code> means it
+              belongs to the class (not instances), so accessible via
+              <code>ClassName.MAX_SIZE</code> or directly.
+              <code>final</code> prevents reassignment — any attempt causes a
+              compile-time error.
+            </p>
+            <p>
+              Spring 2025 Q1a also asks:
+              <em>Can a static method be accessed by an object?</em> — YES:
+              <code>obj.staticMethod()</code> works, but it's better practice to
+              use <code>ClassName.staticMethod()</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q1b -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge green">Q1b</span>
+            <div class="q-title">
+              Polymorphism — LinkedList of Shapes / Animals
+              <span class="marks">4 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              See the full code in Section 3 (Polymorphism with LinkedList). The
+              key pattern is the same for Animals (Spring 2025):
+            </p>
+            <pre><span class="kw">import</span> java.util.LinkedList;
+
+<span class="kw">abstract class</span> <span class="cl">Animal</span> {
+    <span class="kw">abstract void</span> <span class="fn">noise</span>();  <span class="cm">// abstract method</span>
+}
+
+<span class="kw">class</span> <span class="cl">Cow</span> <span class="kw">extends</span> <span class="cl">Animal</span> {
+    String sound;
+    <span class="kw">Cow</span>(String sound) { <span class="kw">this</span>.sound = sound; }
+    <span class="kw">Cow</span>() { <span class="kw">this</span>.sound = <span class="kw">null</span>; }   <span class="cm">// parameter may be null</span>
+    <span class="kw">void</span> <span class="fn">noise</span>() {
+        System.out.println(sound != <span class="kw">null</span> ? sound : <span class="st">"Moo"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cl">Sheep</span> <span class="kw">extends</span> <span class="cl">Animal</span> {
+    String sound;
+    <span class="kw">Sheep</span>(String sound) { <span class="kw">this</span>.sound = sound; }
+    <span class="kw">Sheep</span>() { <span class="kw">this</span>.sound = <span class="kw">null</span>; }
+    <span class="kw">void</span> <span class="fn">noise</span>() {
+        System.out.println(sound != <span class="kw">null</span> ? sound : <span class="st">"Baa"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cl">Animals</span> {
+    LinkedList&lt;<span class="cl">Animal</span>&gt; animalList = <span class="kw">new</span> LinkedList&lt;&gt;();
+
+    <span class="kw">public</span> <span class="fn">Animals</span>() {
+        <span class="cm">// 3 Cow, 2 Sheep (Spring 2025)</span>
+        animalList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Cow</span>(<span class="st">"Moooo"</span>));
+        animalList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Cow</span>(<span class="st">"Muuu"</span>));
+        animalList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Cow</span>());            <span class="cm">// null parameter</span>
+        animalList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Sheep</span>(<span class="st">"Baaa"</span>));
+        animalList.<span class="fn">add</span>(<span class="kw">new</span> <span class="cl">Sheep</span>());          <span class="cm">// null parameter</span>
+
+        <span class="kw">for</span> (<span class="cl">Animal</span> a : animalList) {
+            a.<span class="fn">noise</span>();  <span class="cm">// dynamic dispatch!</span>
+        }
+    }
+}</pre>
+          </div>
+        </div>
+
+        <!-- Q3b -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge orange">Q3b</span>
+            <div class="q-title">
+              Constructor Overloading — Book / Car class
+              <span class="marks">4 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              See full Book solution in Section 2. Car solution follows the same
+              exact pattern. Make sure you write all 4 constructors and create 2
+              objects with different constructors + call display().
+            </p>
+          </div>
+        </div>
+
+        <!-- Q4a -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge">Q4a</span>
+            <div class="q-title">
+              Reference Behavior — newName / newAge value
+              <span class="marks">2 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              <strong>Fall 2024:</strong> <code>employee2 = employee1</code> →
+              both reference the SAME object.
+              <code>employee2.setName("Doe")</code> changes the shared object.
+              So <code>employee1.getName()</code> returns
+              <strong>"Doe"</strong>.
+            </p>
+            <p>
+              <strong>Spring 2025:</strong> <code>person2 = person1</code> →
+              same reference. <code>person2.setAge(30)</code> changes shared
+              object. So <code>person1.getAge()</code> returns
+              <strong>30</strong>.
+            </p>
+            <div class="important">
+              Step-by-step justification: (1) person1 created with age=25. (2)
+              person2 = person1 means person2 is not a copy — it's an alias to
+              the same object. (3) person2.setAge(30) modifies the one shared
+              object. (4) person1.getAge() returns 30.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4b -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge green">Q4b</span>
+            <div class="q-title">
+              Inheritance — Rectangle → Square
+              <span class="marks">4 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              See full solution in Section 3 (Inheritance). Square extends
+              Rectangle, calls <code>super(side, side)</code>, overrides area()
+              and perimeter().
+            </p>
+          </div>
+        </div>
+
+        <!-- Q5a -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge orange">Q5a</span>
+            <div class="q-title">
+              StaticCounter — output and static variable
+              <span class="marks">2 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p><strong>Output is: Counter: 2</strong></p>
+            <p>
+              Step-by-step: counter starts at 0. obj1.incrementCounter() →
+              counter=1. obj2.incrementCounter() → counter=2. Since counter is
+              static (shared), obj1.counter and obj2.counter are the same
+              variable. Both show 2.
+            </p>
+            <p>
+              <strong>Can you change a static variable?</strong> YES — unless
+              it's also <code>final</code>. Static only means it's shared among
+              all instances.
+            </p>
+          </div>
+        </div>
+
+        <!-- Q5b -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge">Q5b</span>
+            <div class="q-title">
+              Abstract Class — Shape → Circle + Rectangle
+              <span class="marks">4 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              See full code in Section 3 (Abstract Class section). For "Shape as
+              interface" (Q6b), change to <code>interface Shape</code> and use
+              <code>implements</code>.
+            </p>
+            <p><strong>Answers to sub-questions:</strong></p>
+            <p>
+              i. <em>What kind of inheritance?</em> → Single inheritance (each
+              child extends one parent)
+            </p>
+            <p>
+              ii. <em>What keyword?</em> → <code>extends</code> for abstract
+              class, <code>implements</code> for interface
+            </p>
+            <p>iii. See the code in Section 3.</p>
+          </div>
+        </div>
+
+        <!-- Q6a -->
+        <div class="q-solution">
+          <div class="q-header">
+            <span class="q-badge pink">Q6a</span>
+            <div class="q-title">
+              Accessor & Mutator — when to use them
+              <span class="marks">2 marks</span>
+            </div>
+          </div>
+          <div class="q-body">
+            <p>
+              We use <strong>accessors (getters)</strong> and
+              <strong>mutators (setters)</strong> when class attributes are
+              <code>private</code> (to protect data).
+            </p>
+            <p>
+              <strong>Accessor</strong>: Used when we need to <em>read</em> the
+              value of a private attribute from outside the class. Example:
+              <code>getName()</code>
+            </p>
+            <p>
+              <strong>Mutator</strong>: Used when we need to <em>change</em> the
+              value of a private attribute from outside the class. We can add
+              validation inside. Example: <code>setAge()</code> can check if age
+              is positive.
+            </p>
+            <pre><span class="kw">class</span> <span class="cl">BankAccount</span> {
+    <span class="kw">private double</span> balance;
+
+    <span class="cm">// Accessor</span>
+    <span class="kw">public double</span> <span class="fn">getBalance</span>() { <span class="kw">return</span> balance; }
+
+    <span class="cm">// Mutator with validation</span>
+    <span class="kw">public void</span> <span class="fn">setBalance</span>(<span class="kw">double</span> amount) {
+        <span class="kw">if</span> (amount >= <span class="num">0</span>) balance = amount;
+        <span class="kw">else</span> System.out.println(<span class="st">"Balance cannot be negative!"</span>);
+    }
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== CHEAT SHEET =================== -->
+      <div class="section" id="cheatsheet">
+        <div class="section-header">
+          <div class="section-num n11">11</div>
+          <div class="section-title">
+            ⚡ Quick Cheat Sheet — Formula & Syntax Reference
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Syntax Quick Reference</h3>
+          <div class="cheat-item">
+            <span class="cheat-key">class</span>
+            <span>public class ClassName { ... }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">object</span>
+            <span>ClassName obj = new ClassName();</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">constructor</span>
+            <span>public ClassName(params) { this.x = x; }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">extends</span>
+            <span>class Child extends Parent { } — inheritance</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">implements</span>
+            <span>class Dog implements Animal { } — interface</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">abstract</span>
+            <span>abstract class Shape { abstract double area(); }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">interface</span>
+            <span>interface Shape { double area(); }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">@Override</span>
+            <span>Write before overriding a method in child class</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">super()</span>
+            <span>Call parent constructor from child constructor</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">static</span>
+            <span>Shared by all instances. Call via ClassName.method()</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">final</span>
+            <span>Cannot be changed. final int X = 5;</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">try-catch</span>
+            <span>try { risky code } catch(Exception e) { handle }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">finally</span>
+            <span>finally { always runs }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">ArrayList</span>
+            <span>List&lt;T&gt; list = new ArrayList&lt;&gt;();</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">LinkedList</span>
+            <span>LinkedList&lt;T&gt; ll = new LinkedList&lt;&gt;();</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">HashSet</span>
+            <span>Set&lt;T&gt; set = new HashSet&lt;&gt;();</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">HashMap</span>
+            <span>Map&lt;K,V&gt; map = new HashMap&lt;&gt;();</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">enum</span>
+            <span>enum Color { RED, GREEN, BLUE }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">JButton</span>
+            <span>JButton btn = new JButton("Label");</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">JTextField</span>
+            <span>JTextField tf = new JTextField(); tf.setText("text");</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">JLabel</span>
+            <span>JLabel lbl = new JLabel("text"); panel.add(lbl);</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">for-each</span>
+            <span>for (Type item : collection) { }</span>
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">iterator</span>
+            <span
+              >Iterator&lt;T&gt; it = list.iterator(); while(it.hasNext()) {
+              it.next(); }</span
+            >
+          </div>
+          <div class="cheat-item">
+            <span class="cheat-key">enum values()</span>
+            <span>for (Day d : Day.values()) { d.getType(); }</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Key Definitions to Memorize</h3>
+          <table>
+            <tr>
+              <th>Term</th>
+              <th>One-Line Definition</th>
+            </tr>
+            <tr>
+              <td>Class</td>
+              <td>Blueprint for creating objects</td>
+            </tr>
+            <tr>
+              <td>Object</td>
+              <td>Instance of a class</td>
+            </tr>
+            <tr>
+              <td>Encapsulation</td>
+              <td>Hiding data using private + getters/setters</td>
+            </tr>
+            <tr>
+              <td>Inheritance</td>
+              <td>Child class gets parent's members (extends)</td>
+            </tr>
+            <tr>
+              <td>Polymorphism</td>
+              <td>One interface, many implementations</td>
+            </tr>
+            <tr>
+              <td>Abstraction</td>
+              <td>
+                Hiding details, showing only essentials (abstract/interface)
+              </td>
+            </tr>
+            <tr>
+              <td>Overloading</td>
+              <td>Same method name, different parameters (same class)</td>
+            </tr>
+            <tr>
+              <td>Overriding</td>
+              <td>Child redefines parent's method (same signature)</td>
+            </tr>
+            <tr>
+              <td>Dynamic Dispatch</td>
+              <td>Runtime decides which overridden method to call</td>
+            </tr>
+            <tr>
+              <td>Upcasting</td>
+              <td>Child object stored in parent reference</td>
+            </tr>
+            <tr>
+              <td>Downcasting</td>
+              <td>Extracting child type from parent reference</td>
+            </tr>
+            <tr>
+              <td>Constructor</td>
+              <td>Special method that runs when object is created</td>
+            </tr>
+            <tr>
+              <td>Iterator</td>
+              <td>Object to traverse a collection (hasNext, next)</td>
+            </tr>
+            <tr>
+              <td>Exception</td>
+              <td>Unexpected runtime error</td>
+            </tr>
+            <tr>
+              <td>MVC</td>
+              <td>Model (data) + View (UI) + Controller (logic)</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Common Mistakes to Avoid</h3>
+          <div class="warning">
+            Using <code>extends</code> for interface. Correct:
+            <code>implements</code> for interface, <code>extends</code> for
+            class/abstract class.
+          </div>
+          <div class="warning">
+            Forgetting <code>@Override</code> when overriding — it's not
+            mandatory but expected in exams.
+          </div>
+          <div class="warning">
+            Confusing overloading (same class, different params) with overriding
+            (child class, same params).
+          </div>
+          <div class="warning">
+            Thinking <code>obj2 = obj1</code> creates a copy. It doesn't — both
+            point to the SAME object!
+          </div>
+          <div class="warning">
+            Forgetting that abstract classes CANNOT be instantiated with
+            <code>new</code>.
+          </div>
+          <div class="warning">
+            Missing <code>public</code> on interface method implementations —
+            they must be public!
+          </div>
+        </div>
+      </div>
+
+      <!-- =================== MOCK TEST =================== -->
+      <div class="section" id="mocktest">
+        <div class="section-header">
+          <div class="section-num n12">12</div>
+          <div class="section-title">🧪 Mock Test — Test Yourself!</div>
+        </div>
+
+        <p style="color: var(--muted); margin-bottom: 20px">
+          Answer these before looking at the solutions. Click "Show Answer" to
+          check.
+        </p>
+
+        <div class="mock-q">
+          <div class="qnum">Q1 — 2 marks</div>
+          <p>
+            What will be the output of the following code? Explain each step.
+          </p>
+          <pre><span class="kw">public class</span> <span class="cl">Test</span> {
+    <span class="kw">static int</span> count = <span class="num">0</span>;
+    <span class="kw">void</span> <span class="fn">increment</span>() { count++; }
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        <span class="cl">Test</span> a = <span class="kw">new</span> <span class="cl">Test</span>();
+        <span class="cl">Test</span> b = <span class="kw">new</span> <span class="cl">Test</span>();
+        a.<span class="fn">increment</span>();
+        a.<span class="fn">increment</span>();
+        b.<span class="fn">increment</span>();
+        System.out.println(<span class="st">"Count: "</span> + count);
+    }
+}</pre>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <strong>Output: Count: 3</strong><br /><br />
+            Step 1: count = 0 (static, shared)<br />
+            Step 2: a.increment() → count = 1<br />
+            Step 3: a.increment() → count = 2<br />
+            Step 4: b.increment() → count = 3 (same shared count!)<br />
+            Both a and b share the same static variable.
+          </div>
+        </div>
+
+        <div class="mock-q">
+          <div class="qnum">Q2 — 4 marks</div>
+          <p>
+            Create a <code>Vehicle</code> abstract class with attribute
+            <code>speed</code> and abstract method <code>move()</code>. Create
+            two subclasses: <code>Car</code> (prints "Car moves at [speed]
+            km/h") and <code>Boat</code> (prints "Boat sails at [speed] km/h").
+            Then create objects and call move().
+          </p>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <pre><span class="kw">abstract class</span> <span class="cl">Vehicle</span> {
+    <span class="kw">int</span> speed;
+    <span class="kw">Vehicle</span>(<span class="kw">int</span> speed) { <span class="kw">this</span>.speed = speed; }
+    <span class="kw">abstract void</span> <span class="fn">move</span>();
+}
+
+<span class="kw">class</span> <span class="cl">Car</span> <span class="kw">extends</span> <span class="cl">Vehicle</span> {
+    <span class="kw">Car</span>(<span class="kw">int</span> speed) { <span class="kw">super</span>(speed); }
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> <span class="fn">move</span>() {
+        System.out.println(<span class="st">"Car moves at "</span> + speed + <span class="st">" km/h"</span>);
+    }
+}
+
+<span class="kw">class</span> <span class="cl">Boat</span> <span class="kw">extends</span> <span class="cl">Vehicle</span> {
+    <span class="kw">Boat</span>(<span class="kw">int</span> speed) { <span class="kw">super</span>(speed); }
+    <span class="kw">@Override</span>
+    <span class="kw">void</span> <span class="fn">move</span>() {
+        System.out.println(<span class="st">"Boat sails at "</span> + speed + <span class="st">" km/h"</span>);
+    }
+}
+
+<span class="cm">// Main:</span>
+<span class="cl">Vehicle</span> v1 = <span class="kw">new</span> <span class="cl">Car</span>(<span class="num">120</span>);  <span class="cm">// upcasting</span>
+<span class="cl">Vehicle</span> v2 = <span class="kw">new</span> <span class="cl">Boat</span>(<span class="num">40</span>);
+v1.<span class="fn">move</span>(); <span class="cm">// Car moves at 120 km/h</span>
+v2.<span class="fn">move</span>(); <span class="cm">// Boat sails at 40 km/h</span></pre>
+          </div>
+        </div>
+
+        <div class="mock-q">
+          <div class="qnum">Q3 — 2 marks</div>
+          <p>
+            Are the following two methods overloading or overriding? Explain
+            why.
+          </p>
+          <pre><span class="cm">// In same class:</span>
+<span class="kw">void</span> <span class="fn">print</span>(String msg) { System.out.println(msg); }
+<span class="kw">void</span> <span class="fn">print</span>(<span class="kw">int</span> num) { System.out.println(num); }</pre>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <strong>OVERLOADING</strong><br />
+            Reason: Both methods have the same name <code>print</code> but
+            different parameter types (String vs int). They are in the same
+            class. This is method overloading — the compiler decides which one
+            to call based on what argument you pass.
+          </div>
+        </div>
+
+        <div class="mock-q">
+          <div class="qnum">Q4 — 4 marks</div>
+          <p>
+            Write a Java program that reads an integer from user input and
+            handles <strong>NumberFormatException</strong>. Use a finally block.
+            Keep asking until valid input is provided.
+          </p>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <pre><span class="kw">import</span> java.util.Scanner;
+<span class="kw">public class</span> <span class="cl">InputHandler</span> {
+    <span class="kw">public static void</span> <span class="fn">main</span>(String[] args) {
+        Scanner sc = <span class="kw">new</span> Scanner(System.in);
+        <span class="kw">boolean</span> valid = <span class="kw">false</span>;
+        <span class="kw">while</span> (!valid) {
+            <span class="kw">try</span> {
+                System.out.print(<span class="st">"Enter an integer: "</span>);
+                <span class="kw">int</span> num = Integer.<span class="fn">parseInt</span>(sc.<span class="fn">nextLine</span>());
+                System.out.println(<span class="st">"You entered: "</span> + num);
+                valid = <span class="kw">true</span>;
+            } <span class="kw">catch</span> (NumberFormatException e) {
+                System.out.println(<span class="st">"Invalid! Not a number."</span>);
+            } <span class="kw">finally</span> {
+                System.out.println(<span class="st">"Attempt complete."</span>);
+            }
+        }
+    }
+}</pre>
+          </div>
+        </div>
+
+        <div class="mock-q">
+          <div class="qnum">Q5 — 1+3 marks</div>
+          <p>
+            Why do we use enum in Java? Write an enum called
+            <code>Season</code> with values SPRING, SUMMER, AUTUMN, WINTER, each
+            having a <code>description</code> attribute. Print each season with
+            its description.
+          </p>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <strong>Why enum?</strong> Enums represent a fixed set of named
+            constants. They make code more readable, type-safe, and prevent
+            invalid values.<br /><br />
+            <pre><span class="kw">public enum</span> <span class="cl">Season</span> {
+    SPRING(<span class="st">"Warm and blooming"</span>),
+    SUMMER(<span class="st">"Hot and sunny"</span>),
+    AUTUMN(<span class="st">"Cool and colorful"</span>),
+    WINTER(<span class="st">"Cold and snowy"</span>);
+
+    <span class="kw">private final</span> String description;
+
+    <span class="kw">private</span> <span class="fn">Season</span>(String desc) {
+        <span class="kw">this</span>.description = desc;
+    }
+
+    <span class="kw">public</span> String <span class="fn">getDescription</span>() { <span class="kw">return</span> description; }
+}
+
+<span class="cm">// Print all:</span>
+<span class="kw">for</span> (<span class="cl">Season</span> s : Season.<span class="fn">values</span>()) {
+    System.out.println(s + <span class="st">": "</span> + s.<span class="fn">getDescription</span>());
+}</pre>
+          </div>
+        </div>
+
+        <div class="mock-q">
+          <div class="qnum">Q6 — GUI (2 marks)</div>
+          <p>
+            Write Swing code to: (i) Create a JButton called
+            <code>loginBtn</code> labeled "Login", (ii) Set text "Enter email"
+            in a JTextField called <code>emailField</code>, (iii) Add a JLabel
+            called <code>titleLabel</code> to a JPanel called
+            <code>mainPanel</code>.
+          </p>
+          <button
+            class="answer-toggle"
+            onclick="this.nextElementSibling.classList.toggle('show')"
+          >
+            Show Answer
+          </button>
+          <div class="answer-reveal">
+            <pre><span class="kw">import</span> javax.swing.*;
+
+<span class="cl">JButton</span> loginBtn = <span class="kw">new</span> <span class="cl">JButton</span>(<span class="st">"Login"</span>);
+
+<span class="cl">JTextField</span> emailField = <span class="kw">new</span> <span class="cl">JTextField</span>();
+emailField.<span class="fn">setText</span>(<span class="st">"Enter email"</span>);
+
+<span class="cl">JLabel</span> titleLabel = <span class="kw">new</span> <span class="cl">JLabel</span>(<span class="st">"Welcome"</span>);
+<span class="cl">JPanel</span> mainPanel = <span class="kw">new</span> <span class="cl">JPanel</span>();
+mainPanel.<span class="fn">add</span>(titleLabel);</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="divider"></div>
+      <div style="text-align: center; padding: 30px; color: var(--muted)">
+        <div
+          style="
+            font-family: &quot;Syne&quot;, sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 8px;
+          "
+        >
+          You've got this! 🎓
+        </div>
+        <p>
+          Focus on: Q1b (polymorphism+LinkedList), Q3b (constructors), Q4
+          (reference behavior), Q5b (abstract/interface), Q2b (enum), Q2c
+          (iterator).
+        </p>
+        <p style="margin-top: 8px">
+          Every question in both papers follows the exact same patterns. You're
+          fully prepared.
+        </p>
+        <div class="badge-row" style="margin-top: 16px">
+          <span class="badge b1">Premier University CSE 1115</span>
+          <span class="badge b3">Good Luck Tomorrow! ✨</span>
+        </div>
+      </div>
+    </div>
+    <!-- /container -->
+
+    <script>
+      // Smooth anchor scrolling already handled by CSS
+    </script>
+  </body>
+</html>
